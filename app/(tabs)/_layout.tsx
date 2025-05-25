@@ -1,7 +1,7 @@
 ﻿// import {StyleSheet} from "react-native";
 import React from "react";
 import {Tabs} from "expo-router";
-import {Image, ImageBackground, Text} from "react-native";
+import {Image, ImageBackground, Text, View} from "react-native";
 import {images} from "@/constants/images";
 import {icons} from "@/constants/icons";
 
@@ -11,32 +11,49 @@ interface TabIconProps {
     title: string;
 }
 
-const TabIcon = ({ focused, icon, title }: TabIconProps) => {
-    return (
-        <>
+function TabIcon({ focused, icon, title }: TabIconProps) {
+    if (focused) {
+        return (
             <ImageBackground
-                source={focused ? images.highlight : null}
-                className={`flex flex-row w-full flex-1 min-w-[112px] min-h-14 mt-4
-        justify-center items-center ${focused ? 'rounded-full overflow-hidden' : ''}`}
+                source={images.highlight}
+                className="flex flex-row w-full flex-1 min-w-[112px] min-h-14 mt-4 justify-center items-center rounded-full overflow-hidden"
             >
-                <Image
-                    source={icon}
-                    tintColor={focused ? "#151312" : "#666"}
-                    className="size-5"
-                />
-                <Text
-                    className={`${focused ? 'text-secondary' : 'text-gray-500'} text-base font-semibold ml-2`}
-                >
+                <Image source={icon} tintColor="#151312" className="size-5" />
+                <Text className="text-secondary text-base font-semibold ml-2">
                     {title}
                 </Text>
             </ImageBackground>
-        </>
+        );
+    }
+
+    return (
+        <View className="size-full justify-center items-center mt-4 rounded-full">
+            <Image source={icon} tintColor="#A8B5DB" className="size-5" />
+        </View>
     );
 }
 
 const _layout = () => {
     return (
-        <Tabs>
+        <Tabs screenOptions={{tabBarShowLabel: false,
+        tabBarItemStyle: {
+            width: '100%',
+            height: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+            tabBarStyle: {
+                backgroundColor: '#0f0d23',
+                borderRadius: 50,
+                marginHorizontal: 20,
+                marginBottom: 36,
+                height: 52,
+                position: 'absolute',
+                overflow: 'hidden',
+                borderWidth: 1,
+                borderColor: '#0f0d23',
+            },
+        }}>
             <Tabs.Screen name="index" options={{title: "Home", headerShown: false, tabBarIcon: ({focused}) => (
 <TabIcon focused={focused} icon={icons.home} title="Home" />
             )}
