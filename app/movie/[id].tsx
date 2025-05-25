@@ -2,7 +2,7 @@
 import React from "react";
 import {useLocalSearchParams} from "expo-router";
 
-const Details = () => {
+const MovieDetails = () => {
 
     const {id} = useLocalSearchParams();
   return (
@@ -12,6 +12,6 @@ const Details = () => {
   );
 };
 
-export default Details;
+export default MovieDetails;
 
 const styles = StyleSheet.create({});
